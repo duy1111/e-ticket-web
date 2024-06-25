@@ -56,7 +56,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const onConfirm = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3001/" + `user/${data.id}`, {
+      const res = await fetch("https://api-e-ticket.onrender.com/" + `user/${data.id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
@@ -77,7 +77,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
   const unDelete = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3001/" + `user/restore/${data.id}`, {
+      const res = await fetch("https://api-e-ticket.onrender.com/" + `user/restore/${data.id}`, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,
@@ -92,6 +92,29 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
       setLoading(false);
       window.location.reload();
 
+    }
+  }
+
+  const updateStaff = async () => {
+    try {
+      setLoading(true);
+      const res = await fetch("https://api-e-ticket.onrender.com/" + `user/updateRoleStaff/${data.id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${session?.accessToken}`,
+          "Content-Type": "application/json",
+        },
+      });
+      if(!res.ok) {
+        toast.error("Failed to update user.");
+        return;
+      }
+      toast.success("User updated successfully.");
+    } catch (error) {
+      toast.error("Failed to update user.");
+    }
+    finally {
+      setLoading(false);
     }
   }
 
@@ -127,7 +150,7 @@ export const CellAction: React.FC<CellActionProps> = ({ data }) => {
             </DropdownMenuItem>
           )}
 
-          {isVisibleUpdateStaff && (<DropdownMenuItem onClick={() => onCopy(data.id.toString())}>
+          {isVisibleUpdateStaff && (<DropdownMenuItem onClick={() => updateStaff()}>
             <LucideMoveUpLeft className="mr-2 h-4 w-4" /> Update Staff
           </DropdownMenuItem>)}
         </DropdownMenuContent>

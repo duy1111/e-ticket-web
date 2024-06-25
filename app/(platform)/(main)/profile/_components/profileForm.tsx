@@ -48,7 +48,7 @@ const ProfileForm = ({initialData}: ProfileFormProps) => {
   const onSubmit = async (data: ProfileFormValues) => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3001/" + `user/profile/update`, {
+      const res = await fetch("https://api-e-ticket.onrender.com/" + `user/profile/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

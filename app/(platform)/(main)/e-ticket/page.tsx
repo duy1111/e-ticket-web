@@ -11,7 +11,7 @@ const ETicketPage = async() => {
 
     const session = await auth()
 
-    const res = await fetch("http://localhost:3001/" + "e-ticket/all", {
+    const res = await fetch("https://api-e-ticket.onrender.com/" + "e-ticket/all", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,

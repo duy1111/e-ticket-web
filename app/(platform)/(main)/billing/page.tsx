@@ -12,7 +12,7 @@ const BillingPage = async() => {
 
     const session = await auth()
 
-    const res = await fetch("http://localhost:3001/" + "billing", {
+    const res = await fetch("https://api-e-ticket.onrender.com/" + "billing", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,

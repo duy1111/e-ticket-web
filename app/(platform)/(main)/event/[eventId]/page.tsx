@@ -20,7 +20,7 @@ const ProductPage = async ({
   });
   let event = null;
   if(res.status === 200) {
-    event = await res.json();
+    event = await res?.json();
   }
   return ( 
     <div className="flex-col w-full">

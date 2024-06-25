@@ -15,7 +15,7 @@ export const NewVerificationForm = () => {
   const { data: session, status } = useSession();
 
   const newVerification = useCallback(async (token: string) => {
-    const res = await fetch("http://localhost:3001/" + "auth/verify" + `?token=${token}`,
+    const res = await fetch("https://api-e-ticket.onrender.com/" + "auth/verify" + `?token=${token}`,
       {
         method: "GET",
         headers: {

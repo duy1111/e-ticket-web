@@ -11,7 +11,7 @@ const UserPage = async() => {
 
     const session = await auth()
 
-    const res = await fetch("http://localhost:3001/" + "user/all", {
+    const res = await fetch("https://api-e-ticket.onrender.com/" + "user/all", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${session?.accessToken}`,

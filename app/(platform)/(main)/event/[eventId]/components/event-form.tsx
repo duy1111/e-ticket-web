@@ -111,7 +111,7 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
     try {
       setLoading(true);
       if (initialData && eventId) {
-        await fetch("http://localhost:3001/" + `event/update/${eventId}`, {
+        await fetch("https://api-e-ticket.onrender.com/" + `event/update/${eventId}`, {
           method: "PUT",
           body: JSON.stringify({
             ...data,
@@ -128,7 +128,7 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
           },
         });
       } else {
-        await fetch("http://localhost:3001/" + "event/create", {
+        await fetch("https://api-e-ticket.onrender.com/" + "event/create", {
           method: "POST",
           body: JSON.stringify({
             ...data,
@@ -158,18 +158,30 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
   const { isSubmitting, isValid } = form.formState;
 
   const onDelete = async () => {
-    // try {
-    //   setLoading(true);
-    //   await axios.delete(`/api/${params.storeId}/products/${params.productId}`);
-    //   router.refresh();
-    //   router.push(`/${params.storeId}/products`);
-    //   toast.success("Product deleted.");
-    // } catch (error: any) {
-    //   toast.error("Something went wrong.");
-    // } finally {
-    //   setLoading(false);
-    //   setOpen(false);
-    // }
+    try {
+      setLoading(true);
+      const res = await fetch("https://api-e-ticket.onrender.com/" + `event/delete/${eventId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${session?.data?.accessToken}`
+        },
+
+      });
+      if(!res.ok){
+        toast.error('Failed to delete event.');
+        return;
+      }
+      toast.success('Event deleted.');
+      setOpen(false);
+      router.back();
+    } catch (error) {
+      toast.error('Failed to delete event.');
+    }finally {
+      setLoading(false);
+      window.location.reload();
+
+    }
   };
 
 
@@ -267,7 +279,7 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
                     <Input
                       type="number"
                       disabled={loading}
-                      placeholder="Total"
+                      placeholder="0"
                       {...field}
                     />
                   </FormControl>

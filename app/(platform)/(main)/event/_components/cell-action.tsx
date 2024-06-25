@@ -35,7 +35,7 @@ export const CellAction: React.FC<CellActionProps> = ({
   const onConfirm = async () => {
     try {
       setLoading(true);
-      const res = await fetch("http://localhost:3001/" + `event/delete/${data.id}`, {
+      const res = await fetch("https://api-e-ticket.onrender.com/" + `event/delete/${data.id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +50,7 @@ export const CellAction: React.FC<CellActionProps> = ({
       toast.success('Event deleted.');
       router.refresh();
     } catch (error) {
-      toast.error('Make sure you removed all categories using this billboard first.');
+      toast.error('Failed to delete event.');
     } finally {
       setOpen(false);
       setLoading(false);
@@ -67,7 +67,7 @@ export const CellAction: React.FC<CellActionProps> = ({
     if(status === "loading") return;
     try {
       setLoading(true);
-      await fetch("http://localhost:3001/"+`event/public`, {
+      await fetch("https://api-e-ticket.onrender.com/"+`event/public`, {
         method: "POST",
         body: JSON.stringify({
           id: +id

@@ -27,7 +27,6 @@ export function UserNav() {
   const router = useRouter()
   const signOut = () => {
     logout()
-    router.push("/auth/login")
   }
 
   useEffect(() => {}, [user])

@@ -70,7 +70,7 @@ const PlacesAutocomplete = ({
     const results = await getGeocode({ address });
     const { lat, lng } = await getLatLng(results[0]);
     const res = await fetch(
-        "http://localhost:3001/" + "location/create",
+        "https://api-e-ticket.onrender.com/" + "location/create",
         {
             method: "POST",
             body: JSON.stringify({

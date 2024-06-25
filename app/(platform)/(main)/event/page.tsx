@@ -11,7 +11,7 @@ import { EventClient } from "./_components/client";
 const EventPage = async () => {
     const session = await auth()
 
-  const res = await fetch("http://localhost:3001/" + "event", {
+  const res = await fetch("https://api-e-ticket.onrender.com/" + "event", {
     method: "GET",
     headers: {
       Authorization: `Bearer ${session?.accessToken}`,
