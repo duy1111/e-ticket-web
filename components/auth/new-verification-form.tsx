@@ -24,7 +24,6 @@ export const NewVerificationForm = () => {
         },
       }
     );
-    console.log(res);
     return res;
   }, [session])
 
@@ -43,10 +42,10 @@ export const NewVerificationForm = () => {
     newVerification(token)
       .then((data: any) => {
         if(data.status === 200) {
-          setSuccess(data.statusText);
+          setSuccess("Verification successful!");
         }
         else{
-          setError(data.statusText);
+          setError("Something went wrong!");
         }
       })
       .catch(() => {
