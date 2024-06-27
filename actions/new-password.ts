@@ -17,7 +17,7 @@ export const newPassword = async (
 
   const { password } = validatedFields.data;
 
-  const res = await fetch(process.env.BACKEND_URL + "/auth/reset-password", {
+  const res = await fetch(process.env.BACKEND_URL + "auth/reset-password", {
     method: "POST",
     body: JSON.stringify({
       password: password,
