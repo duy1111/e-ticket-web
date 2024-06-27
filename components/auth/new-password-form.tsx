@@ -85,7 +85,7 @@ export const NewPasswordForm = () => {
           <FormError message={error} />
           <FormSuccess message={success} />
           <Button type="submit" className="w-full">
-            Sent reset email
+            Reset Password
           </Button>
         </form>
       </Form>
