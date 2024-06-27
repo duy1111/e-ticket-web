@@ -20,13 +20,17 @@ export const newPassword = async (
   const res = await fetch(process.env.BACKEND_URL + "/auth/reset-password", {
     method: "POST",
     body: JSON.stringify({
-      password,
-      token,
+      password: password,
+      token: token,
     }),
     headers: {
       "Content-Type": "application/json",
     },
   });
+
+  if (!res.ok) {
+    return { error: JSON.parse(await res.text()).message };
+  }
 
   return { success: "Password updated" };
 };
