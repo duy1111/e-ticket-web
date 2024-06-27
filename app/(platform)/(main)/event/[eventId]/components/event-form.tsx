@@ -90,8 +90,8 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
     : {
         name: "",
         description: "",
-        start_time: new Date(new Date().setDate(new Date().getDate() + 1)),
-        end_time: new Date(new Date().setDate(new Date().getDate() + 2)),
+        start_time: new Date(new Date().setDate(new Date().getDate())),
+        end_time: new Date(new Date().setDate(new Date().getDate())),
         locationId: undefined,
         imageUrl: undefined,
         eTicketBook: {
@@ -336,7 +336,7 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
                         selected={field.value}
                         onSelect={field.onChange}
                         disabled={(date) =>
-                          date < new Date() || date < new Date("1900-01-01")
+                          date <= new Date() || date < new Date("1900-01-01")
                         }
                         initialFocus
                       />
@@ -377,7 +377,7 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
                         selected={field.value}
                         onSelect={field.onChange}
                         disabled={(date) =>
-                          date < new Date() || date < new Date("1900-01-01")
+                          date <= new Date() || date < new Date("1900-01-01")
                         }
                         initialFocus
                       />
