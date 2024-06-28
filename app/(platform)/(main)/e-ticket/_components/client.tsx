@@ -17,8 +17,6 @@ interface ETicketsClientProps {
 export const ETicketClient: React.FC<ETicketsClientProps> = ({
   data
 }) => {
-  const params = useParams();
-  const router = useRouter();
 
   return (
     <> 
@@ -26,7 +24,7 @@ export const ETicketClient: React.FC<ETicketsClientProps> = ({
         <Heading title={`List ETicket`} description="Manage ETickets" />
       </div>
       <Separator />
-      <DataTable searchKey="name" columns={columns} data={data} />
+      <DataTable searchKey="serialNo" columns={columns} data={data} />
     </>
   );
 };

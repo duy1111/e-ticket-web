@@ -26,7 +26,7 @@ export const BillingClient: React.FC<BillingClientProps> = ({
         <Heading title={`List Billing`} description="Manage Billings" />
       </div>
       <Separator />
-      <DataTable searchKey="name" columns={columns} data={data} />
+      <DataTable searchKey="event" columns={columns} data={data} />
     </>
   );
 };

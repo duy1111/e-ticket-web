@@ -41,12 +41,8 @@ import { Editor } from "@/components/editer";
 const formSchema = z.object({
   name: z.string().min(1),
   description: z.string().min(1),
-  start_time: z.date({
-    required_error: "start time is required.",
-  }),
-  end_time: z.date({
-    required_error: "end time is required.",
-  }),
+  start_time: z.date(),
+  end_time: z.date(),
   imageUrl: z.string().min(1),
   locationId: z.number(),
   eTicketBook: z.object({
@@ -90,8 +86,8 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
     : {
         name: "",
         description: "",
-        start_time: new Date(new Date().setDate(new Date().getDate())),
-        end_time: new Date(new Date().setDate(new Date().getDate())),
+        start_time: new Date(),
+        end_time: new Date(),
         locationId: undefined,
         imageUrl: undefined,
         eTicketBook: {
@@ -154,6 +150,7 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
       setLoading(false);
     }
   };
+  console.log("watch", form.watch());
 
   const { isSubmitting, isValid } = form.formState;
 
@@ -182,6 +179,12 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
       window.location.reload();
 
     }
+  };
+
+  const adjustDateToMidnight = (date: Date | undefined) => {
+    const adjustedDate = new Date(date || new Date());
+    adjustedDate.setHours(23, 59, 59, 59); // Sets the time to 12 midnight
+    return adjustedDate;
   };
 
 
@@ -335,9 +338,6 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
                         mode="single"
                         selected={field.value}
                         onSelect={field.onChange}
-                        disabled={(date) =>
-                          date <= new Date() || date < new Date("1900-01-01")
-                        }
                         initialFocus
                       />
                     </PopoverContent>
@@ -375,10 +375,10 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
                       <Calendar
                         mode="single"
                         selected={field.value}
-                        onSelect={field.onChange}
-                        disabled={(date) =>
-                          date <= new Date() || date < new Date("1900-01-01")
-                        }
+                        onSelect={(selectedDate) => {
+                          const dateWithMidnight = adjustDateToMidnight(selectedDate);
+                          field.onChange(dateWithMidnight); // Call the original onChange with the adjusted date
+                        }}
                         initialFocus
                       />
                     </PopoverContent>
