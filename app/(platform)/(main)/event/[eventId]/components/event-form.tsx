@@ -150,7 +150,6 @@ export const ProductForm: React.FC<EventFormProps> = ({ initialData, eventId }) 
       setLoading(false);
     }
   };
-  console.log("watch", form.watch());
 
   const { isSubmitting, isValid } = form.formState;
 
